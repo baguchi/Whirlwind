@@ -1,8 +1,8 @@
 package baguchan.wild_gale.client;
 
 import baguchan.wild_gale.WildGaleMod;
-import baguchan.wild_gale.client.render.model.WildGaleModel;
 import baguchan.wild_gale.client.render.WildGaleRender;
+import baguchan.wild_gale.client.render.model.WildGaleModel;
 import baguchan.wild_gale.client.render.model.WindModel;
 import baguchan.wild_gale.registry.ModEntities;
 import net.neoforged.api.distmarker.Dist;

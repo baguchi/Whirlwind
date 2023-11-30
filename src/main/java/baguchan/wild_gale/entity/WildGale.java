@@ -38,7 +38,7 @@ public class WildGale extends Monster {
 
     @Override
     public boolean hurt(DamageSource p_21016_, float p_21017_) {
-        if(p_21016_.is(DamageTypeTags.IS_PROJECTILE)){
+        if (p_21016_.is(DamageTypeTags.IS_PROJECTILE)) {
             return false;
         }
         return super.hurt(p_21016_, p_21017_);
@@ -52,11 +52,11 @@ public class WildGale extends Monster {
     protected void spawnSprintParticle() {
         BlockPos blockpos = this.getOnPosLegacy();
         BlockState blockstate = this.level().getBlockState(blockpos);
-        if(!blockstate.addRunningEffects(this.level(), blockpos, this))
+        if (!blockstate.addRunningEffects(this.level(), blockpos, this))
             if (blockstate.getRenderShape() != RenderShape.INVISIBLE) {
                 Vec3 vec3 = this.getDeltaMovement();
                 BlockPos blockpos1 = this.blockPosition();
-                for(int i = 0; i < 2; i++) {
+                for (int i = 0; i < 2; i++) {
                     double d0 = this.getX() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width * 2;
                     double d1 = this.getZ() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width * 2;
                     if (blockpos1.getX() != blockpos.getX()) {

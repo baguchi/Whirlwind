@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class WildGaleRender<T extends WildGale> extends MobRenderer<T, WildGaleModel<T>> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(WildGaleMod.MODID, "textures/entity/wild_gale.png");
+
     public WildGaleRender(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new WildGaleModel<>(renderManagerIn.bakeLayer(ModModelLayers.WILD_GALE)), 0.5F);
         this.addLayer(new WindLayer<>(this, renderManagerIn.getModelSet()));
