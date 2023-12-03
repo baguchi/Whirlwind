@@ -1,10 +1,10 @@
 package baguchan.wild_gale.client;
 
-import baguchan.wild_gale.WildGaleMod;
+import baguchan.wild_gale.WhirlWindMod;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModModelLayers {
-    public static ModelLayerLocation WILD_GALE = new ModelLayerLocation(new ResourceLocation(WildGaleMod.MODID, "wild_gale"), "wild_gale");
-    public static ModelLayerLocation WIND = new ModelLayerLocation(new ResourceLocation(WildGaleMod.MODID, "wind"), "wind");
+    public static ModelLayerLocation WHIRLWIND = new ModelLayerLocation(new ResourceLocation(WhirlWindMod.MODID, "whirl_wind"), "whirl_wind");
+    public static ModelLayerLocation WIND = new ModelLayerLocation(new ResourceLocation(WhirlWindMod.MODID, "wind"), "wind");
 }

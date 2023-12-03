@@ -5,7 +5,7 @@ import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
-public class WildGaleAnimation {
+public class WhirlWindAnimation {
 
     public static final AnimationDefinition IDLE = AnimationDefinition.Builder.withLength(1f).looping()
             .addAnimation("rod_bone",

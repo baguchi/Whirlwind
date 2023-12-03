@@ -19,8 +19,8 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class WildGale extends Monster {
-    public WildGale(EntityType<? extends WildGale> p_33002_, Level p_33003_) {
+public class WhirlWind extends Monster {
+    public WhirlWind(EntityType<? extends WhirlWind> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
     }
 

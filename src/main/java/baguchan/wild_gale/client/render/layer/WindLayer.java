@@ -1,6 +1,6 @@
 package baguchan.wild_gale.client.render.layer;
 
-import baguchan.wild_gale.WildGaleMod;
+import baguchan.wild_gale.WhirlWindMod;
 import baguchan.wild_gale.client.ModModelLayers;
 import baguchan.wild_gale.client.render.model.WindModel;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -24,7 +24,7 @@ import net.minecraft.world.entity.LivingEntity;
 import org.joml.Matrix4f;
 
 public class WindLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    private static final ResourceLocation LOCATION = new ResourceLocation(WildGaleMod.MODID, "textures/entity/wild_gale_wind.png");
+    private static final ResourceLocation LOCATION = new ResourceLocation(WhirlWindMod.MODID, "textures/entity/whirl_wind_wind.png");
     private final WindModel<T> windModel;
     protected static final RenderStateShard.ShaderStateShard RENDERTYPE_ENERGY_SWIRL_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getRendertypeEnergySwirlShader);
 

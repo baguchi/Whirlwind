@@ -3,21 +3,21 @@ package baguchan.wild_gale.client.render.model;// Made with Blockbench 4.8.3
 // Paste this class into your mod and generate all required imports
 
 
-import baguchan.wild_gale.client.render.animation.WildGaleAnimation;
+import baguchan.wild_gale.client.render.animation.WhirlWindAnimation;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.Entity;
 
-public class WildGaleModel<T extends Entity> extends HierarchicalModel<T> {
+public class WhirlWindModel<T extends Entity> extends HierarchicalModel<T> {
 	private final ModelPart realroot;
 	private final ModelPart root;
 	private final ModelPart head;
 	private final ModelPart rod_bone;
 	private final ModelPart rod_bone2;
 
-	public WildGaleModel(ModelPart root) {
+	public WhirlWindModel(ModelPart root) {
 		this.realroot = root;
 		this.root = root.getChild("root");
 		this.head = this.root.getChild("head");
@@ -64,7 +64,7 @@ public class WildGaleModel<T extends Entity> extends HierarchicalModel<T> {
 		this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
 		this.head.z = -3F * limbSwingAmount;
 		this.root.xRot = limbSwingAmount * 22.5F * (float) (Math.PI / 180.0);
-		this.animateWalk(WildGaleAnimation.IDLE, ageInTicks, 1.0F, 1.0F, 1.0F);
+		this.animateWalk(WhirlWindAnimation.IDLE, ageInTicks, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
