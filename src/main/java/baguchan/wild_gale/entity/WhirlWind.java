@@ -1,47 +1,42 @@
 package baguchan.wild_gale.entity;
 
+import baguchan.wild_gale.registry.ModEntities;
+import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.monster.breeze.Breeze;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class WhirlWind extends Monster {
+public class WhirlWind extends Breeze {
     public WhirlWind(EntityType<? extends WhirlWind> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
+        this.xpReward = 20;
     }
 
     @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new ClimbOnTopOfPowderSnowGoal(this, this.level()));
-        //this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+    public boolean canAttack(LivingEntity p_312275_) {
+        return p_312275_.getType() != ModEntities.WHIRLWIND.get() && super.canAttack(p_312275_);
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.625F).add(Attributes.MAX_HEALTH, 60F);
     }
 
     @Override
-    public boolean hurt(DamageSource p_21016_, float p_21017_) {
-        if (p_21016_.is(DamageTypeTags.IS_PROJECTILE)) {
-            return false;
-        }
-        return super.hurt(p_21016_, p_21017_);
+    protected Brain<?> makeBrain(Dynamic<?> p_312201_) {
+        return WhirlWindAi.makeBrain(this.whirlBrainProvider().makeBrain(p_312201_));
     }
 
     @Override
@@ -75,7 +70,12 @@ public class WhirlWind extends Monster {
             }
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.MAX_HEALTH, 50F);
+    @Override
+    public boolean ignoreExplosion(Explosion p_312868_) {
+        return p_312868_.getBlockInteraction() == Explosion.BlockInteraction.TRIGGER_BLOCK;
+    }
+
+    protected Brain.Provider<WhirlWind> whirlBrainProvider() {
+        return Brain.provider(WhirlWindAi.MEMORY_TYPES, WhirlWindAi.SENSOR_TYPES);
     }
 }

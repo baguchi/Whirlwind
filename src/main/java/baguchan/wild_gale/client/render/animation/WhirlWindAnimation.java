@@ -6,7 +6,16 @@ import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
 public class WhirlWindAnimation {
-
+    public static final AnimationDefinition SLIDE = AnimationDefinition.Builder.withLength(1.0F)
+            .addAnimation(
+                    "body",
+                    new AnimationChannel(
+                            AnimationChannel.Targets.POSITION,
+                            new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(0.2F, KeyframeAnimations.posVec(0.0F, 0.0F, -6.0F), AnimationChannel.Interpolations.LINEAR)
+                    )
+            )
+            .build();
     public static final AnimationDefinition IDLE = AnimationDefinition.Builder.withLength(1f).looping()
             .addAnimation("rod_bone",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
