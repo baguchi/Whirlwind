@@ -14,6 +14,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
+import java.util.Locale;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(WhirlWindMod.MODID)
 public class WhirlWindMod {
@@ -37,12 +39,20 @@ public class WhirlWindMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ModItems.dispenserInit();
     }
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             event.accept(ModItems.WHIRL_WIND_SPAWNEGG.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.BREEZE_ROD.get());
+            event.accept(ModItems.BREEZE_POWDER.get());
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.WIND_CHARGE.get());
         }
     }
 
@@ -52,5 +62,9 @@ public class WhirlWindMod {
                 new ResourceLocation("minecraft:trial_chambers/spawner/contents/breeze"),
                 new ResourceLocation(WhirlWindMod.MODID, "trial_chambers/whirl_wind"), 1);
 
+    }
+
+    public static ResourceLocation prefix(String name) {
+        return new ResourceLocation(WhirlWindMod.MODID, name.toLowerCase(Locale.ROOT));
     }
 }

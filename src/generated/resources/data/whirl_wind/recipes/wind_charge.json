@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "whirl_wind:breeze_powder"
+    },
+    {
+      "item": "whirl_wind:breeze_powder"
+    },
+    {
+      "item": "whirl_wind:breeze_powder"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "result": {
+    "item": "whirl_wind:wind_charge"
+  }
+}
