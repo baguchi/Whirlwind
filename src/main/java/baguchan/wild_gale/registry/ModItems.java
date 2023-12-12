@@ -28,6 +28,7 @@ public class ModItems {
         DispenserBlock.registerBehavior(WIND_CHARGE.get(), new AbstractProjectileDispenseBehavior() {
             protected Projectile getProjectile(Level p_123476_, Position p_123477_, ItemStack p_123478_) {
                 WindCharge windcharge = new WindCharge(EntityType.WIND_CHARGE, p_123476_);
+                windcharge.setPos(p_123477_.x(), p_123477_.y(), p_123477_.z());
                 return windcharge;
             }
 
