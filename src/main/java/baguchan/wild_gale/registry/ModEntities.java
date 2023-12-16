@@ -1,6 +1,7 @@
 package baguchan.wild_gale.registry;
 
 import baguchan.wild_gale.WhirlWindMod;
+import baguchan.wild_gale.entity.ChargePotion;
 import baguchan.wild_gale.entity.WhirlWind;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -18,6 +19,7 @@ public class ModEntities {
 
 
     public static final Supplier<EntityType<WhirlWind>> WHIRLWIND = ENTITIES_REGISTRY.register("whirl_wind", () -> EntityType.Builder.of(WhirlWind::new, MobCategory.MONSTER).sized(0.8F, 2.0F).clientTrackingRange(8).build(prefix("whirl_wind")));
+    public static final Supplier<EntityType<ChargePotion>> CHARGE_POTION = ENTITIES_REGISTRY.register("charge_potion", () -> EntityType.Builder.<ChargePotion>of(ChargePotion::new, MobCategory.MISC).sized(0.3F, 0.3F).clientTrackingRange(10).build(prefix("charge_potion")));
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {

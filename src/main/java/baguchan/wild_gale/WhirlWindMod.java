@@ -5,8 +5,14 @@ import baguchan.wild_gale.registry.ModEntities;
 import baguchan.wild_gale.registry.ModItems;
 import baguchan.wild_gale.registry.ModMemorys;
 import baguchan.wild_gale.util.JigjawHelper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -40,6 +46,8 @@ public class WhirlWindMod {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModItems.dispenserInit();
+        PotionBrewing.addContainer(ModItems.CHARGE_POTION.get());
+        PotionBrewing.addContainerRecipe(ModItems.CHARGE_POTION.get(), ModItems.WIND_CHARGE.get(), Items.SPLASH_POTION);
     }
 
     // Add the example block item to the building blocks tab
@@ -53,7 +61,19 @@ public class WhirlWindMod {
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModItems.WIND_CHARGE.get());
+            BuiltInRegistries.POTION.holders()
+                    .filter(p_270012_ -> !p_270012_.is(Potions.EMPTY_ID))
+                    .map(p_269986_ -> PotionUtils.setPotion(new ItemStack(ModItems.CHARGE_POTION.get()), p_269986_.value()))
+                    .forEach(event::accept);
         }
+
+    }
+
+    private static void generatePotionEffectTypes(
+            BuildCreativeModeTabContentsEvent p_270129_, HolderLookup<Potion> p_270334_, Item p_270968_, CreativeModeTab.TabVisibility p_270778_
+    ) {
+        p_270334_.listElements()
+        ;
     }
 
     private void serverStart(final ServerAboutToStartEvent event) {

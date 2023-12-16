@@ -1,6 +1,7 @@
 package baguchan.wild_gale.registry;
 
 import baguchan.wild_gale.WhirlWindMod;
+import baguchan.wild_gale.item.ChargePotionItem;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.core.dispenser.BlockSource;
@@ -23,6 +24,7 @@ public class ModItems {
     public static final Supplier<Item> WIND_CHARGE = ITEM_REGISTRY.register("wind_charge", () -> new Item((new Item.Properties())));
     public static final Supplier<Item> BREEZE_ROD = ITEM_REGISTRY.register("breeze_rod", () -> new Item((new Item.Properties())));
     public static final Supplier<Item> BREEZE_POWDER = ITEM_REGISTRY.register("breeze_powder", () -> new Item((new Item.Properties())));
+    public static final Supplier<Item> CHARGE_POTION = ITEM_REGISTRY.register("charge_potion", () -> new ChargePotionItem((new Item.Properties().stacksTo(1))));
 
     public static void dispenserInit() {
         DispenserBlock.registerBehavior(WIND_CHARGE.get(), new AbstractProjectileDispenseBehavior() {

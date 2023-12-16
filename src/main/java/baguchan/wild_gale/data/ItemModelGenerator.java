@@ -27,6 +27,8 @@ public class ItemModelGenerator extends ItemModelProvider {
         this.singleTex(ModItems.WIND_CHARGE);
         this.singleTex(ModItems.BREEZE_POWDER);
         this.singleTex(ModItems.BREEZE_ROD);
+
+        this.generated(itemPath(ModItems.CHARGE_POTION).getPath(), prefix("item/charge_potion_1"), prefix("item/charge_potion"));
     }
 
     private ItemModelBuilder generated(String name, ResourceLocation... layers) {

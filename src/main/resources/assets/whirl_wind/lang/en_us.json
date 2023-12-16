@@ -3,5 +3,7 @@
   "item.whirl_wind.breeze_rod": "Breeze Rod",
   "item.whirl_wind.breeze_powder": "Breeze Powder",
   "item.whirl_wind.wind_charge": "Wind Charge",
-  "entity.whirl_wind.whirl_wind": "Whirl Wind"
+  "item.whirl_wind.charge_potion": "Charge Potion",
+  "entity.whirl_wind.whirl_wind": "Whirl Wind",
+  "entity.whirl_wind.charge_potion": "Charge Potion"
 }

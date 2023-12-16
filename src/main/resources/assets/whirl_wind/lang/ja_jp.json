@@ -3,5 +3,7 @@
   "item.whirl_wind.breeze_rod": "ブリーズロッド",
   "item.whirl_wind.breeze_powder": "ブリーズパウダー",
   "item.whirl_wind.wind_charge": "ウィンドチャージ",
-  "entity.whirl_wind.whirl_wind": "Whirl Wind"
+  "item.whirl_wind.charge_potion": "チャージポーション",
+  "entity.whirl_wind.whirl_wind": "Whirl Wind",
+  "entity.whirl_wind.charge_potion": "チャージポーション"
 }
