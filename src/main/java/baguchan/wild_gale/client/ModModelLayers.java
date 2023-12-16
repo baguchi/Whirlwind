@@ -6,5 +6,4 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ModModelLayers {
     public static ModelLayerLocation WHIRLWIND = new ModelLayerLocation(new ResourceLocation(WhirlWindMod.MODID, "whirl_wind"), "whirl_wind");
-    public static ModelLayerLocation WIND = new ModelLayerLocation(new ResourceLocation(WhirlWindMod.MODID, "wind"), "wind");
 }

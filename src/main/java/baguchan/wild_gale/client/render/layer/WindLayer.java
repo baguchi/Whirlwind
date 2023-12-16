@@ -3,6 +3,7 @@ package baguchan.wild_gale.client.render.layer;
 import baguchan.wild_gale.WhirlWindMod;
 import baguchan.wild_gale.client.ModModelLayers;
 import baguchan.wild_gale.client.render.model.WindModel;
+import baguchan.wild_gale.entity.WhirlWind;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -13,14 +14,13 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 
-public class WindLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
+public class WindLayer<T extends WhirlWind, M extends EntityModel<T>> extends RenderLayer<T, M> {
     private static final ResourceLocation LOCATION = new ResourceLocation(WhirlWindMod.MODID, "textures/entity/whirl_wind_wind.png");
     private final WindModel<T> windModel;
     public WindLayer(RenderLayerParent<T, M> p_174493_, EntityModelSet p_174494_) {
         super(p_174493_);
-        this.windModel = new WindModel<T>(p_174494_.bakeLayer(ModModelLayers.WIND));
+        this.windModel = new WindModel<T>(p_174494_.bakeLayer(ModModelLayers.WHIRLWIND));
     }
 
     public void render(

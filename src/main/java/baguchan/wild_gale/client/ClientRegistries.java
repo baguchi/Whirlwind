@@ -3,7 +3,6 @@ package baguchan.wild_gale.client;
 import baguchan.wild_gale.WhirlWindMod;
 import baguchan.wild_gale.client.render.WhirlWindRender;
 import baguchan.wild_gale.client.render.model.WhirlWindModel;
-import baguchan.wild_gale.client.render.model.WindModel;
 import baguchan.wild_gale.registry.ModEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -20,7 +19,5 @@ public class ClientRegistries {
     @SubscribeEvent
     public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.WHIRLWIND, WhirlWindModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.WIND, WindModel::createBodyLayer);
-
     }
 }
