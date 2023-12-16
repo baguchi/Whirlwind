@@ -136,8 +136,6 @@ public class ChargePotion extends ThrowableItemProjectile implements ItemSupplie
                     float f = p_314513_.radius() * 2.0F;
                     double d0 = Math.sqrt(ChargePotion.this.distanceToSqr(livingentity)) / (double) f;
                     double d1 = (1.0 - d0);
-                    double d2 = (float) (d1 * d1 + d1) / 2.0 * 7.0 * (double) f + 1.0;
-
                     if (livingentity.isSensitiveToWater()) {
                         livingentity.hurt(ChargePotion.this.damageSources().indirectMagic(ChargePotion.this, ChargePotion.this.getOwner()), (float) d1 * 3);
                     }
