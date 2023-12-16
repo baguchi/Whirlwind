@@ -215,14 +215,6 @@ public class WhirlWindAnimation {
             .build();
     public static final AnimationDefinition SLIDE = AnimationDefinition.Builder.withLength(1.0F)
             .addAnimation(
-                    "body",
-                    new AnimationChannel(
-                            AnimationChannel.Targets.POSITION,
-                            new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(0.2F, KeyframeAnimations.posVec(0.0F, 0.0F, -6.0F), AnimationChannel.Interpolations.LINEAR)
-                    )
-            )
-            .addAnimation(
                     "wind_middle",
                     new AnimationChannel(
                             AnimationChannel.Targets.POSITION,
