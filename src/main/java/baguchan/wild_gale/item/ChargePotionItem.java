@@ -32,4 +32,9 @@ public class ChargePotionItem extends PotionItem {
 
         return InteractionResultHolder.sidedSuccess(itemstack, p_43303_.isClientSide());
     }
+
+    @Override
+    public String getDescriptionId(ItemStack p_43003_) {
+        return this.getOrCreateDescriptionId();
+    }
 }

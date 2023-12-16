@@ -97,7 +97,7 @@ public class ChargePotion extends ThrowableItemProjectile implements ItemSupplie
                             this.getX(),
                             this.getY(),
                             this.getZ(),
-                            (float) (3),
+                            (float) (3.5),
                             false,
                             Level.ExplosionInteraction.BLOW,
                             ParticleTypes.GUST,
@@ -133,8 +133,13 @@ public class ChargePotion extends ThrowableItemProjectile implements ItemSupplie
             boolean flag = potion == Potions.WATER && list.isEmpty();
             if (flag) {
                 if (p_314456_ instanceof LivingEntity livingentity) {
+                    float f = p_314513_.radius() * 2.0F;
+                    double d0 = Math.sqrt(ChargePotion.this.distanceToSqr(livingentity)) / (double) f;
+                    double d1 = (1.0 - d0);
+                    double d2 = (float) (d1 * d1 + d1) / 2.0 * 7.0 * (double) f + 1.0;
+
                     if (livingentity.isSensitiveToWater()) {
-                        livingentity.hurt(ChargePotion.this.damageSources().indirectMagic(ChargePotion.this, ChargePotion.this.getOwner()), 1.0F);
+                        livingentity.hurt(ChargePotion.this.damageSources().indirectMagic(ChargePotion.this, ChargePotion.this.getOwner()), (float) d1 * 3);
                     }
 
                     if (livingentity.isOnFire() && livingentity.isAlive()) {
@@ -146,8 +151,10 @@ public class ChargePotion extends ThrowableItemProjectile implements ItemSupplie
                     if (livingentity.isAffectedByPotions()) {
                         for (MobEffectInstance mobeffectinstance : list) {
                             Entity entity = ChargePotion.this.getEffectSource();
-                            double d0 = ChargePotion.this.distanceToSqr(livingentity);
-                            double d1 = 1.0 - Math.sqrt(d0) / p_314513_.radius();
+                            float f = p_314513_.radius() * 2.0F;
+                            double d0 = Math.sqrt(ChargePotion.this.distanceToSqr(livingentity)) / (double) f;
+                            double d1 = (1.0 - d0);
+
                             MobEffect mobeffect = mobeffectinstance.getEffect();
                             if (mobeffect.isInstantenous()) {
                                 mobeffect.applyInstantenousEffect(ChargePotion.this, ChargePotion.this.getOwner(), livingentity, mobeffectinstance.getAmplifier(), d1);

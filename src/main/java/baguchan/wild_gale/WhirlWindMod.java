@@ -1,22 +1,22 @@
 package baguchan.wild_gale;
 
 
+import baguchan.wild_gale.recipe.ChargeBrewingRecipe;
 import baguchan.wild_gale.registry.ModEntities;
 import baguchan.wild_gale.registry.ModItems;
 import baguchan.wild_gale.registry.ModMemorys;
 import baguchan.wild_gale.util.JigjawHelper;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.brewing.BrewingRecipeRegistry;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
@@ -44,10 +44,10 @@ public class WhirlWindMod {
         NeoForge.EVENT_BUS.addListener(this::serverStart);
     }
 
+
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModItems.dispenserInit();
-        PotionBrewing.addContainer(ModItems.CHARGE_POTION.get());
-        PotionBrewing.addContainerRecipe(ModItems.CHARGE_POTION.get(), ModItems.WIND_CHARGE.get(), Items.SPLASH_POTION);
+        BrewingRecipeRegistry.addRecipe(new ChargeBrewingRecipe());
     }
 
     // Add the example block item to the building blocks tab
@@ -61,19 +61,14 @@ public class WhirlWindMod {
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModItems.WIND_CHARGE.get());
+
+        }
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             BuiltInRegistries.POTION.holders()
                     .filter(p_270012_ -> !p_270012_.is(Potions.EMPTY_ID))
                     .map(p_269986_ -> PotionUtils.setPotion(new ItemStack(ModItems.CHARGE_POTION.get()), p_269986_.value()))
                     .forEach(event::accept);
         }
-
-    }
-
-    private static void generatePotionEffectTypes(
-            BuildCreativeModeTabContentsEvent p_270129_, HolderLookup<Potion> p_270334_, Item p_270968_, CreativeModeTab.TabVisibility p_270778_
-    ) {
-        p_270334_.listElements()
-        ;
     }
 
     private void serverStart(final ServerAboutToStartEvent event) {
