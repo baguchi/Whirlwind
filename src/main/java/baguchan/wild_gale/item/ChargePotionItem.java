@@ -1,10 +1,10 @@
 package baguchan.wild_gale.item;
 
+import baguchan.wild_gale.entity.ChargePotion;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PotionItem;
@@ -19,7 +19,7 @@ public class ChargePotionItem extends PotionItem {
     public InteractionResultHolder<ItemStack> use(Level p_43303_, Player p_43304_, InteractionHand p_43305_) {
         ItemStack itemstack = p_43304_.getItemInHand(p_43305_);
         if (!p_43303_.isClientSide) {
-            ThrownPotion thrownpotion = new ThrownPotion(p_43303_, p_43304_);
+            ChargePotion thrownpotion = new ChargePotion(p_43303_, p_43304_);
             thrownpotion.setItem(itemstack);
             thrownpotion.shootFromRotation(p_43304_, p_43304_.getXRot(), p_43304_.getYRot(), -20.0F, 0.5F, 1.0F);
             p_43303_.addFreshEntity(thrownpotion);
