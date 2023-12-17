@@ -72,7 +72,7 @@ public class WhirlWind extends Breeze {
 
     @Override
     public boolean ignoreExplosion(Explosion p_312868_) {
-        return p_312868_.getExploder() == this;
+        return p_312868_.getDirectSourceEntity() == this;
     }
 
     protected Brain.Provider<WhirlWind> whirlBrainProvider() {
