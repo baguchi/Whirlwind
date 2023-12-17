@@ -1,6 +1,8 @@
 package baguchan.wild_gale.item;
 
 import baguchan.wild_gale.entity.ChargePotion;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -29,7 +31,16 @@ public class ChargePotionItem extends PotionItem {
         if (!p_43304_.getAbilities().instabuild) {
             itemstack.shrink(1);
         }
-
+        p_43303_.playSound(
+                null,
+                p_43304_.getX(),
+                p_43304_.getY(),
+                p_43304_.getZ(),
+                SoundEvents.LINGERING_POTION_THROW,
+                SoundSource.NEUTRAL,
+                0.5F,
+                0.4F / (p_43303_.getRandom().nextFloat() * 0.4F + 0.8F)
+        );
         return InteractionResultHolder.sidedSuccess(itemstack, p_43303_.isClientSide());
     }
 
