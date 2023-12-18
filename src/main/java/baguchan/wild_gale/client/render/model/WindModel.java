@@ -15,7 +15,7 @@ public class WindModel<T extends WhirlWind> extends WhirlWindModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.wind.visible = true;
+		this.wind_swirls.visible = true;
 		this.body.visible = false;
 		this.head.visible = false;
 	}
