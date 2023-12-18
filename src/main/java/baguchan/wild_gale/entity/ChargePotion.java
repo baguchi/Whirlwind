@@ -97,7 +97,7 @@ public class ChargePotion extends ThrowableItemProjectile implements ItemSupplie
                             this.getX(),
                             this.getY(),
                             this.getZ(),
-                            (float) (3.5),
+                            (float) (3),
                             false,
                             Level.ExplosionInteraction.BLOW,
                             ParticleTypes.GUST,
