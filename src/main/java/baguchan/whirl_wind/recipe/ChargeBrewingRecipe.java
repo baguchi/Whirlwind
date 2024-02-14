@@ -15,7 +15,7 @@ public class ChargeBrewingRecipe implements IBrewingRecipe {
     @Override
     public boolean isInput(ItemStack stack) {
         Item item = stack.getItem();
-        return item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE;
+        return item == Items.POTION;
     }
 
     /**
@@ -33,7 +33,7 @@ public class ChargeBrewingRecipe implements IBrewingRecipe {
      */
     @Override
     public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-        if (!input.isEmpty() && !ingredient.isEmpty() && isIngredient(ingredient)) {
+        if (isInput(input) && !ingredient.isEmpty() && isIngredient(ingredient)) {
             ItemStack result = PotionUtils.setPotion(new ItemStack(ModItems.CHARGE_POTION.get()), PotionUtils.getPotion(input));
             if (result != input) {
                 return result;

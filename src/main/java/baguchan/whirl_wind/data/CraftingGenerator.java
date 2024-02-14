@@ -1,7 +1,6 @@
 package baguchan.whirl_wind.data;
 
 import baguchan.whirl_wind.registry.ModItems;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -9,11 +8,9 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 
-import java.util.concurrent.CompletableFuture;
-
 public class CraftingGenerator extends RecipeProvider {
-    public CraftingGenerator(PackOutput p_248933_, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(p_248933_, lookupProvider);
+    public CraftingGenerator(PackOutput p_248933_) {
+        super(p_248933_);
     }
 
     @Override
