@@ -25,12 +25,12 @@ public class WhirlWindModel<T extends WhirlWind> extends HierarchicalModel<T> {
 	public WhirlWindModel(ModelPart whirl_wind) {
 		this.realroot = whirl_wind;
 		this.whirl_wind = whirl_wind.getChild("whirl_wind");
-		this.head = this.whirl_wind.getChild("head");
 		this.body = this.whirl_wind.getChild("body");
+		this.head = this.body.getChild("head");
 		this.wind_swirls = this.whirl_wind.getChild("wind_swirls");
 		this.windBottom = this.wind_swirls.getChild("wind_bottom");
-		this.windMid = this.windBottom.getChild("wind_middle");
-		this.windTop = this.windMid.getChild("wind_top");
+		this.windMid = this.wind_swirls.getChild("wind_middle");
+		this.windTop = this.wind_swirls.getChild("wind_top");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -39,33 +39,34 @@ public class WhirlWindModel<T extends WhirlWind> extends HierarchicalModel<T> {
 
 		PartDefinition whirl_wind = partdefinition.addOrReplaceChild("whirl_wind", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition head = whirl_wind.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 25).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F))
-				.texOffs(27, 8).addBox(-5.0F, -1.0F, -4.25F, 10.0F, 3.0F, 4.0F, new CubeDeformation(0.5F))
-				.texOffs(0, 8).addBox(-4.0F, -5.0F, -4.0F, 8.0F, 9.0F, 8.0F, new CubeDeformation(0.75F)), PartPose.offset(0.0F, -31.0F, 0.0F));
+		PartDefinition body = whirl_wind.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition body = whirl_wind.addOrReplaceChild("body", CubeListBuilder.create().texOffs(56, 0).addBox(-3.0F, -6.0F, -1.0F, 4.0F, 16.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(1.0F, -18.0F, -1.0F));
+		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 25).addBox(-4.0F, -8.5F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F))
+				.texOffs(26, 7).addBox(-5.0F, -5.5F, -4.5F, 10.0F, 4.0F, 5.0F, new CubeDeformation(0.5F))
+				.texOffs(0, 8).addBox(-4.0F, -9.5F, -4.0F, 8.0F, 9.0F, 8.0F, new CubeDeformation(0.75F))
+				.texOffs(1, 44).addBox(-4.0F, -8.3F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.75F)), PartPose.offset(0.0F, -26.5F, 0.0F));
 
-		PartDefinition rods = body.addOrReplaceChild("rods", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition torso = body.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(56, 0).addBox(-3.0F, -5.0F, -1.0F, 4.0F, 21.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(1.0F, -19.0F, -1.0F));
 
-		PartDefinition rod4_r1 = rods.addOrReplaceChild("rod4_r1", CubeListBuilder.create().texOffs(36, 26).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 2.0F, 1.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition rods = torso.addOrReplaceChild("rods", CubeListBuilder.create(), PartPose.offset(-1.0F, 1.0F, 1.0F));
 
-		PartDefinition rod3_r1 = rods.addOrReplaceChild("rod3_r1", CubeListBuilder.create().texOffs(36, 26).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-9.0F, 2.0F, 1.0F, 0.0F, 0.0F, -0.2618F));
+		PartDefinition rod3_r1 = rods.addOrReplaceChild("rod3_r1", CubeListBuilder.create().texOffs(34, 26).addBox(-3.0F, -6.0F, -1.0F, 6.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-6.0622F, 3.0F, 3.5F, -2.8362F, 1.0472F, 3.1416F));
 
-		PartDefinition rod2_r1 = rods.addOrReplaceChild("rod2_r1", CubeListBuilder.create().texOffs(36, 26).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 2.0F, 9.0F, -0.2618F, 0.0F, 0.0F));
+		PartDefinition rod2_r1 = rods.addOrReplaceChild("rod2_r1", CubeListBuilder.create().texOffs(34, 26).addBox(-3.0F, -6.0F, -1.0F, 6.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(6.0622F, 3.0F, 3.5F, -2.8362F, -1.0472F, 3.1416F));
 
-		PartDefinition rod1_r1 = rods.addOrReplaceChild("rod1_r1", CubeListBuilder.create().texOffs(36, 26).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 2.0F, -7.0F, 0.2618F, 0.0F, 0.0F));
+		PartDefinition rod1_r1 = rods.addOrReplaceChild("rod1_r1", CubeListBuilder.create().texOffs(34, 26).addBox(-3.0F, -6.0F, -1.0F, 6.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 3.0F, -7.0F, 0.3054F, 0.0F, 0.0F));
 
 		PartDefinition wind_swirls = whirl_wind.addOrReplaceChild("wind_swirls", CubeListBuilder.create(), PartPose.offset(1.0F, -18.0F, -1.0F));
 
-		PartDefinition wind_bottom = wind_swirls.addOrReplaceChild("wind_bottom", CubeListBuilder.create().texOffs(80, 2).addBox(-7.0F, 12.0F, -5.0F, 12.0F, 6.0F, 12.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition wind_top = wind_swirls.addOrReplaceChild("wind_top", CubeListBuilder.create().texOffs(40, 25).addBox(-12.0F, -9.0F, -10.0F, 22.0F, 14.0F, 22.0F, new CubeDeformation(0.5F))
+				.texOffs(64, 62).addBox(-9.0F, -9.0F, -7.0F, 16.0F, 14.0F, 16.0F, new CubeDeformation(0.5F))
+				.texOffs(92, 93).addBox(-5.5F, -9.0F, -3.5F, 9.0F, 14.0F, 9.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition wind_middle = wind_bottom.addOrReplaceChild("wind_middle", CubeListBuilder.create().texOffs(0, 62).addBox(-9.0F, 5.0F, -7.0F, 16.0F, 7.0F, 16.0F, new CubeDeformation(0.5F))
+		PartDefinition wind_middle = wind_swirls.addOrReplaceChild("wind_middle", CubeListBuilder.create().texOffs(0, 62).addBox(-9.0F, 5.0F, -7.0F, 16.0F, 7.0F, 16.0F, new CubeDeformation(0.5F))
 				.texOffs(0, 87).addBox(-7.0F, 5.0F, -5.0F, 12.0F, 7.0F, 12.0F, new CubeDeformation(0.5F))
 				.texOffs(0, 108).addBox(-5.5F, 5.0F, -3.5F, 9.0F, 7.0F, 9.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition wind_top = wind_middle.addOrReplaceChild("wind_top", CubeListBuilder.create().texOffs(40, 25).addBox(-12.0F, -9.0F, -10.0F, 22.0F, 14.0F, 22.0F, new CubeDeformation(0.0F))
-				.texOffs(64, 62).addBox(-9.0F, -9.0F, -7.0F, 16.0F, 14.0F, 16.0F, new CubeDeformation(0.5F))
-				.texOffs(92, 93).addBox(-5.5F, -9.0F, -3.5F, 9.0F, 14.0F, 9.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition wind_bottom = wind_swirls.addOrReplaceChild("wind_bottom", CubeListBuilder.create().texOffs(80, 2).addBox(-7.0F, 12.0F, -5.0F, 12.0F, 6.0F, 12.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
