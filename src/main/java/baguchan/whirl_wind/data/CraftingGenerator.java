@@ -6,7 +6,6 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.world.item.Items;
 
 public class CraftingGenerator extends RecipeProvider {
     public CraftingGenerator(PackOutput p_248933_) {
@@ -15,12 +14,7 @@ public class CraftingGenerator extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput p_301172_) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.WIND_CHARGE.get())
-                .requires(ModItems.BREEZE_POWDER.get(), 3)
-                .requires(Items.REDSTONE)
-                .unlockedBy("has_item", has(ModItems.BREEZE_POWDER.get()))
-                .save(p_301172_);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BREEZE_POWDER.get(), 2)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.WIND_CHARGE.get(), 2)
                 .requires(ModItems.BREEZE_ROD.get())
                 .unlockedBy("has_item", has(ModItems.BREEZE_ROD.get()))
                 .save(p_301172_);

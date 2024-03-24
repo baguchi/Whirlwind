@@ -61,7 +61,6 @@ public class WhirlWindMod {
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.BREEZE_ROD.get());
-            event.accept(ModItems.BREEZE_POWDER.get());
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModItems.WIND_CHARGE.get());
