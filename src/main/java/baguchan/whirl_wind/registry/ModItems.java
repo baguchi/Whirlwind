@@ -25,7 +25,6 @@ public class ModItems {
     public static final Supplier<Item> WHIRL_WIND_SPAWNEGG = ITEM_REGISTRY.register("whirl_wind_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.WHIRLWIND, 11506911, 9529055, (new Item.Properties().requiredFeatures(FeatureFlags.UPDATE_1_21))));
     public static final Supplier<Item> WIND_CHARGE = ITEM_REGISTRY.register("wind_charge", () -> new WindChargeItem((new Item.Properties().requiredFeatures(FeatureFlags.UPDATE_1_21))));
     public static final Supplier<Item> BREEZE_ROD = ITEM_REGISTRY.register("breeze_rod", () -> new Item((new Item.Properties().requiredFeatures(FeatureFlags.UPDATE_1_21))));
-    public static final Supplier<Item> STORM_SWORD = ITEM_REGISTRY.register("storm_sword", () -> new Item((new Item.Properties().stacksTo(1).durability(320).requiredFeatures(FeatureFlags.UPDATE_1_21))));
     public static final Supplier<Item> CHARGE_POTION = ITEM_REGISTRY.register("charge_potion", () -> new ChargePotionItem((new Item.Properties().stacksTo(1).requiredFeatures(FeatureFlags.UPDATE_1_21))));
 
     public static void dispenserInit() {

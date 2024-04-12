@@ -5,5 +5,6 @@
   "item.whirl_wind.wind_charge": "Wind Charge",
   "item.whirl_wind.charge_potion": "Charge Potion",
   "entity.whirl_wind.whirl_wind": "Whirl Wind",
-  "entity.whirl_wind.charge_potion": "Charge Potion"
+  "entity.whirl_wind.charge_potion": "Charge Potion",
+  "filled_map.trial_chambers": "Trial Chambers"
 }

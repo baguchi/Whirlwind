@@ -5,5 +5,6 @@
   "item.whirl_wind.wind_charge": "ウィンドチャージ",
   "item.whirl_wind.charge_potion": "チャージポーション",
   "entity.whirl_wind.whirl_wind": "Whirl Wind",
-  "entity.whirl_wind.charge_potion": "チャージポーション"
+  "entity.whirl_wind.charge_potion": "チャージポーション",
+  "filled_map.trial_chambers": "トライアルチャンバー"
 }

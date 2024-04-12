@@ -1,11 +1,14 @@
 package baguchan.whirl_wind;
 
 
+import baguchan.whirl_wind.event.ModVillagerTradeEvent;
 import baguchan.whirl_wind.recipe.ChargeBrewingRecipe;
 import baguchan.whirl_wind.registry.ModEntities;
 import baguchan.whirl_wind.registry.ModItems;
 import baguchan.whirl_wind.registry.ModMemorys;
 import baguchan.whirl_wind.util.JigjawHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -17,10 +20,12 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.util.thread.EffectiveSide;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.brewing.BrewingRecipeRegistry;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.Locale;
 
@@ -44,6 +49,7 @@ public class WhirlWindMod {
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
         NeoForge.EVENT_BUS.addListener(this::serverStart);
+        NeoForge.EVENT_BUS.addListener(ModVillagerTradeEvent::loadTrades);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WindConfig.COMMON_SPEC);
 
     }
@@ -84,5 +90,12 @@ public class WhirlWindMod {
 
     public static ResourceLocation prefix(String name) {
         return new ResourceLocation(WhirlWindMod.MODID, name.toLowerCase(Locale.ROOT));
+    }
+
+    public static RegistryAccess registryAccess() {
+        if (EffectiveSide.get().isServer()) {
+            return ServerLifecycleHooks.getCurrentServer().registryAccess();
+        }
+        return Minecraft.getInstance().getConnection().registryAccess();
     }
 }
