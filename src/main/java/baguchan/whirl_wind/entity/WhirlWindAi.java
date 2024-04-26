@@ -1,6 +1,5 @@
 package baguchan.whirl_wind.entity;
 
-import baguchan.whirl_wind.WindConfig;
 import baguchan.whirl_wind.entity.behavior.ShootGust;
 import baguchan.whirl_wind.entity.behavior.WhirlShootWhenStuck;
 import baguchan.whirl_wind.entity.behavior.WhirlWindLongJump;
@@ -30,6 +29,7 @@ public class WhirlWindAi {
     public static final float JUMP_CIRCLE_INNER_RADIUS = 4.0F;
     public static final float JUMP_CIRCLE_MIDDLE_RADIUS = 8.0F;
     public static final float JUMP_CIRCLE_OUTER_RADIUS = 20.0F;
+
     static final List<SensorType<? extends Sensor<? super Breeze>>> SENSOR_TYPES = ImmutableList.of(
             SensorType.NEAREST_LIVING_ENTITIES, SensorType.HURT_BY, SensorType.NEAREST_PLAYERS, SensorType.BREEZE_ATTACK_ENTITY_SENSOR
     );
@@ -49,6 +49,7 @@ public class WhirlWindAi {
             MemoryModuleType.BREEZE_JUMP_TARGET,
             ModMemorys.BREEZE_SHOOT_REMAIN.get(),
             ModMemorys.BREEZE_SHOOT_REMAIN_COOLDOWN.get(),
+            MemoryModuleType.BREEZE_LEAVING_WATER,
             MemoryModuleType.HURT_BY,
             MemoryModuleType.HURT_BY_ENTITY,
             MemoryModuleType.PATH
@@ -71,8 +72,7 @@ public class WhirlWindAi {
         p_312350_.addActivityWithConditions(
                 Activity.FIGHT,
                 ImmutableList.of(
-                        Pair.of(0, StartAttacking.create(predicate -> WindConfig.COMMON.whirlWindAttackIfHurt.get(), p_312881_ -> p_312881_.getBrain().getMemory(MemoryModuleType.HURT_BY_ENTITY))),
-                        Pair.of(0, StartAttacking.create(p_312881_ -> p_312881_.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER))),
+                        Pair.of(0, StartAttacking.create(p_312881_ -> p_312881_.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE))),
                         Pair.of(1, StopAttackingIfTargetInvalid.create()),
                         Pair.of(2, new ShootGust()),
                         Pair.of(3, new WhirlShootWhenStuck()),

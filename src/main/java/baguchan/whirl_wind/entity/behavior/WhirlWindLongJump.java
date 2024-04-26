@@ -148,8 +148,8 @@ public class WhirlWindLongJump extends Behavior<Breeze> {
                         false,
                         Level.ExplosionInteraction.BLOW,
                         ParticleTypes.GUST,
-                        ParticleTypes.GUST_EMITTER,
-                        SoundEvents.WIND_BURST
+                        ParticleTypes.GUST_EMITTER_LARGE,
+                        SoundEvents.BREEZE_WIND_CHARGE_BURST
                 );
     }
 

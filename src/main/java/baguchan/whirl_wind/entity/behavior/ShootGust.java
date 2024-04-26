@@ -15,7 +15,7 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.monster.breeze.Breeze;
-import net.minecraft.world.entity.projectile.WindCharge;
+import net.minecraft.world.entity.projectile.windcharge.WindCharge;
 import net.minecraft.world.phys.Vec3;
 
 public class ShootGust extends Behavior<Breeze> {
@@ -97,8 +97,10 @@ public class ShootGust extends Behavior<Breeze> {
                         double d0 = livingentity.getX() - p_312605_.getX();
                         double d1 = livingentity.getY(0.3) - p_312605_.getY(0.5);
                         double d2 = livingentity.getZ() - p_312605_.getZ();
-                        WindCharge windcharge = new WindCharge(EntityType.WIND_CHARGE, p_312605_, p_312907_);
+                        WindCharge windcharge = new WindCharge(EntityType.WIND_CHARGE, p_312907_);
                         p_312605_.playSound(SoundEvents.BREEZE_SHOOT, 1.5F, 1.0F);
+                        windcharge.setOwner(p_312605_);
+                        windcharge.setPos(p_312605_.getEyePosition());
                         windcharge.shoot(d0, d1, d2, 0.4F + brain.getMemory(ModMemorys.BREEZE_SHOOT_REMAIN.get()).get() * 0.1F, (float) (5 - p_312907_.getDifficulty().getId() * 4));
                         p_312907_.addFreshEntity(windcharge);
                     }

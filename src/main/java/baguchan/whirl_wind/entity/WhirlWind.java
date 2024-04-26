@@ -1,6 +1,5 @@
 package baguchan.whirl_wind.entity;
 
-import baguchan.whirl_wind.WindConfig;
 import baguchan.whirl_wind.registry.ModEntities;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
@@ -53,8 +52,8 @@ public class WhirlWind extends Breeze {
                 Vec3 vec3 = this.getDeltaMovement();
                 BlockPos blockpos1 = this.blockPosition();
                 for (int i = 0; i < 2; i++) {
-                    double d0 = this.getX() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width * 2;
-                    double d1 = this.getZ() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width * 2;
+                    double d0 = this.getX() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width() * 2;
+                    double d1 = this.getZ() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width() * 2;
                     if (blockpos1.getX() != blockpos.getX()) {
                         d0 = Mth.clamp(d0, (double) blockpos.getX(), (double) blockpos.getX() + 1.0);
                     }
@@ -76,10 +75,6 @@ public class WhirlWind extends Breeze {
         return p_312868_.getDirectSourceEntity() == this;
     }
 
-    @Override
-    public boolean canAttackType(EntityType<?> p_312806_) {
-        return WindConfig.COMMON.whirlWindAttackIfHurt.get() || p_312806_ == EntityType.PLAYER;
-    }
 
 
     protected Brain.Provider<WhirlWind> whirlBrainProvider() {
