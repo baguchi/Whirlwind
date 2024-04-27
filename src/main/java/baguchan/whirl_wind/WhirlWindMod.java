@@ -3,6 +3,7 @@ package baguchan.whirl_wind;
 import baguchan.whirl_wind.registry.ModEntities;
 import baguchan.whirl_wind.registry.ModItems;
 import baguchan.whirl_wind.registry.ModMemorys;
+import baguchan.whirl_wind.registry.ModParticleTypes;
 import baguchan.whirl_wind.util.JigjawHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
@@ -34,6 +35,7 @@ public class WhirlWindMod {
         // Register the Deferred Register to the mod event bus so items get registered
         ModItems.ITEM_REGISTRY.register(modEventBus);
         ModEntities.ENTITIES_REGISTRY.register(modEventBus);
+        ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 
         ModMemorys.MEMORY_REGISTER.register(modEventBus);
 

@@ -2,10 +2,12 @@ package baguchan.whirl_wind.data;
 
 import baguchan.whirl_wind.WhirlWindMod;
 import baguchan.whirl_wind.registry.ModEntities;
+import baguchan.whirl_wind.registry.ModEntityTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
@@ -24,6 +26,11 @@ public class EntityTagGenerator extends EntityTypeTagsProvider {
         this.tag(EntityTypeTags.NO_ANGER_FROM_WIND_CHARGE)
                 .add(
                         ModEntities.WHIRLWIND.get()
+                );
+        this.tag(ModEntityTags.NON_AFFECT_WIND)
+                .add(
+                        ModEntities.WHIRLWIND.get(),
+                        EntityType.BREEZE
                 );
     }
 }

@@ -1,13 +1,17 @@
 package baguchan.whirl_wind.entity;
 
 import baguchan.whirl_wind.registry.ModEntities;
+import baguchan.whirl_wind.registry.ModEntityTags;
+import baguchan.whirl_wind.registry.ModParticleTypes;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -18,6 +22,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class WhirlWind extends Breeze {
     public WhirlWind(EntityType<? extends WhirlWind> p_33002_, Level p_33003_) {
@@ -42,6 +48,47 @@ public class WhirlWind extends Breeze {
     @Override
     public boolean canSpawnSprintParticle() {
         return true;
+    }
+
+
+    @Override
+    public void aiStep() {
+        if (this.level().isClientSide()) {
+            if (this.getPose() == Pose.INHALING) {
+                this.spawnCloudParticles();
+            }
+        }
+
+        super.aiStep();
+
+        if (this.getPose() == Pose.INHALING) {
+            // This code is used to move other entities around the Whirlwind.
+            // Thanks aether Team. from Aether's Whirl Wind code
+            List<Entity> entityList = this.level().getEntities(this, this.getBoundingBox().inflate(6, 4, 6))
+                    .stream().filter((entity -> !entity.getType().is(ModEntityTags.NON_AFFECT_WIND))).toList();
+            for (Entity entity : entityList) {
+                double x = (float) entity.getX();
+                double y = (float) entity.getY();
+                double z = (float) entity.getZ();
+                double distance = this.distanceTo(entity);
+                double d1 = y - this.getY();
+
+                double d3 = Math.atan2(this.getX() - x, this.getZ() - z) / 0.0175;
+                entity.setDeltaMovement(entity.getDeltaMovement().add(Math.sin(0.0175 * d3) * 0.055, 0, Math.cos(0.0175 * d3) * 0.055));
+            }
+        }
+    }
+
+    public void spawnCloudParticles() {
+        for (int i = 0; i < 2; i++) {
+            float moveX = (float) ((this.getRandom().nextDouble() - this.getRandom().nextDouble()) * 3);
+            float moveY = (float) ((this.getRandom().nextDouble() - this.getRandom().nextDouble()) * 3);
+            float moveZ = (float) ((this.getRandom().nextDouble() - this.getRandom().nextDouble()) * 3);
+            double d1 = this.getX() + moveX;
+            double d4 = this.getY() + moveY;
+            double d7 = this.getZ() + moveZ;
+            this.level().addParticle(ModParticleTypes.WIND.get(), d1, d4, d7, 0F, 0F, 0F);
+        }
     }
 
     protected void spawnSprintParticle() {
