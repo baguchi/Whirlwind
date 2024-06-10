@@ -62,14 +62,6 @@ type = "required"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.${ mod_id }]]
-modId = "bagus_lib"
-type = "required"
-# This version range declares a minimum of the current minecraft version up to but not including the next major version
-versionRange = "${bagus_lib_version_range}"
-ordering = "NONE"
-side = "BOTH"
-
 [[accessTransformers]]
 file = "META-INF/accesstransformer.cfg"
 

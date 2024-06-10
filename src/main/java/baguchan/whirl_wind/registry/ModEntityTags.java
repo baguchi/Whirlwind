@@ -10,6 +10,6 @@ public interface ModEntityTags {
     TagKey<EntityType<?>> NON_AFFECT_WIND = create("non_affect_wind");
 
     private static TagKey<EntityType<?>> create(String p_203849_) {
-        return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(WhirlWindMod.MODID, p_203849_));
+        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(WhirlWindMod.MODID, p_203849_));
     }
 }

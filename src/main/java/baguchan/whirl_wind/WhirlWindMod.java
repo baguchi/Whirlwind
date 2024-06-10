@@ -60,13 +60,13 @@ public class WhirlWindMod {
     private void serverStart(final ServerAboutToStartEvent event) {
 
         JigjawHelper.registerJigsaw(event.getServer(),
-                new ResourceLocation("minecraft:trial_chambers/spawner/contents/breeze"),
-                new ResourceLocation(WhirlWindMod.MODID, "trial_chambers/whirl_wind"), 1);
+                ResourceLocation.fromNamespaceAndPath("minecraft", "trial_chambers/spawner/contents/breeze"),
+                ResourceLocation.fromNamespaceAndPath(WhirlWindMod.MODID, "trial_chambers/whirl_wind"), 1);
 
     }
 
     public static ResourceLocation prefix(String name) {
-        return new ResourceLocation(WhirlWindMod.MODID, name.toLowerCase(Locale.ROOT));
+        return ResourceLocation.fromNamespaceAndPath(WhirlWindMod.MODID, name.toLowerCase(Locale.ROOT));
     }
 
     public static RegistryAccess registryAccess() {

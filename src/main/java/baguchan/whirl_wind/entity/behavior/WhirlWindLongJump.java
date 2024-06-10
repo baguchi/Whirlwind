@@ -146,7 +146,7 @@ public class WhirlWindLongJump extends Behavior<Breeze> {
                         breeze.getZ(),
                         (float) (3 + breeze.getRandom().nextDouble()),
                         false,
-                        Level.ExplosionInteraction.BLOW,
+                        Level.ExplosionInteraction.TRIGGER,
                         ParticleTypes.GUST,
                         ParticleTypes.GUST_EMITTER_LARGE,
                         SoundEvents.BREEZE_WIND_CHARGE_BURST

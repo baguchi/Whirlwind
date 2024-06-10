@@ -5,7 +5,6 @@ import baguchan.whirl_wind.entity.WhirlWind;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.flag.FeatureFlags;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -18,7 +17,7 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES_REGISTRY = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, WhirlWindMod.MODID);
 
 
-    public static final Supplier<EntityType<WhirlWind>> WHIRLWIND = ENTITIES_REGISTRY.register("whirl_wind", () -> EntityType.Builder.of(WhirlWind::new, MobCategory.MONSTER).sized(0.8F, 2.2F).clientTrackingRange(8).requiredFeatures(FeatureFlags.UPDATE_1_21).build(prefix("whirl_wind")));
+    public static final Supplier<EntityType<WhirlWind>> WHIRLWIND = ENTITIES_REGISTRY.register("whirl_wind", () -> EntityType.Builder.of(WhirlWind::new, MobCategory.MONSTER).sized(0.8F, 2.2F).clientTrackingRange(8).build(prefix("whirl_wind")));
 
     @SubscribeEvent
     public static void registerEntityAttribute(EntityAttributeCreationEvent event) {

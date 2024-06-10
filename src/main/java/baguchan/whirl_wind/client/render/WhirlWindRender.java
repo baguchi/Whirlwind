@@ -12,8 +12,8 @@ import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class WhirlWindRender<T extends WhirlWind> extends MobRenderer<T, WhirlWindModel<T>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(WhirlWindMod.MODID, "textures/entity/whirl_wind.png");
-    private static final RenderType EYES = RenderType.eyes(new ResourceLocation(WhirlWindMod.MODID, "textures/entity/whirl_wind_eye.png"));
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(WhirlWindMod.MODID, "textures/entity/whirl_wind.png");
+    private static final RenderType EYES = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(WhirlWindMod.MODID, "textures/entity/whirl_wind_eye.png"));
 
     public WhirlWindRender(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new WhirlWindModel<>(renderManagerIn.bakeLayer(ModModelLayers.WHIRLWIND)), 0.5F);

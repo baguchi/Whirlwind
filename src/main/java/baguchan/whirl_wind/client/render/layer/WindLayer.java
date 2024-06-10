@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class WindLayer<T extends WhirlWind, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    private static final ResourceLocation LOCATION = new ResourceLocation(WhirlWindMod.MODID, "textures/entity/whirl_wind_wind.png");
+    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(WhirlWindMod.MODID, "textures/entity/whirl_wind_wind.png");
     private final WindModel<T> windModel;
     public WindLayer(RenderLayerParent<T, M> p_174493_, EntityModelSet p_174494_) {
         super(p_174493_);
@@ -40,7 +40,7 @@ public class WindLayer<T extends WhirlWind, M extends EntityModel<T>> extends Re
         this.getParentModel().copyPropertiesTo(this.windModel);
         this.windModel.setupAnim(p_116954_, p_116955_, p_116956_, p_116958_, p_116959_, p_116960_);
         VertexConsumer vertexconsumer = p_116952_.getBuffer(RenderType.breezeWind(getTextureLocation(p_116954_), this.xOffset(f) % 1.0F, 0.0F));
-        this.windModel.renderToBuffer(p_116951_, vertexconsumer, p_116953_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.windModel.renderToBuffer(p_116951_, vertexconsumer, p_116953_, OverlayTexture.NO_OVERLAY);
         p_116951_.popPose();
 
     }
