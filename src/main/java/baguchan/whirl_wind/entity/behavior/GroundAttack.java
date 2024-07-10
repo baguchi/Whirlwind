@@ -153,7 +153,7 @@ public class GroundAttack extends Behavior<Breeze> {
             Vec3 vec31 = vec3.normalize().scale(d0);
             if (d0 > 0.0 && breeze != pushedEntity) {
 
-                pushedEntity.hurt(breeze.damageSources().mobAttack(breeze), Mth.floor((Mth.clamp(vec3.length(), 1F, 3.5F) / 3.5F) * 5.0F));
+                pushedEntity.hurt(breeze.damageSources().mobAttack(breeze), Mth.floor(Mth.clamp(3.5F - vec3.length(), 0F, 3.5F) * 6.0F));
                 pushedEntity.push(vec31.x, 0.699999988079071, vec31.z);
                 if (pushedEntity instanceof ServerPlayer) {
                     ServerPlayer serverplayer = (ServerPlayer) pushedEntity;
