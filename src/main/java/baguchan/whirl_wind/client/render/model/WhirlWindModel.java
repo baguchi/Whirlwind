@@ -87,6 +87,7 @@ public class WhirlWindModel<T extends WhirlWind> extends HierarchicalModel<T> {
 		this.animate(entity.slide, WhirlWindAnimation.SLIDE, ageInTicks);
 		this.animate(entity.longJump, WhirlWindAnimation.JUMP, ageInTicks, 0.25F);
 		this.animate(entity.shoot, WhirlWindAnimation.SHOOT, ageInTicks);
+		this.animate(entity.groundAttackAnimationState, WhirlWindAnimation.GROUND_ATTACK, ageInTicks);
 		this.animateWalk(WhirlWindAnimation.IDLE, ageInTicks, 1.0F, 1.0F, 1.0F);
 	}
 

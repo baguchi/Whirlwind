@@ -8,10 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -26,9 +23,19 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class WhirlWind extends Breeze {
+    public AnimationState groundAttackAnimationState = new AnimationState();
     public WhirlWind(EntityType<? extends WhirlWind> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         this.xpReward = 20;
+    }
+
+    @Override
+    public void handleEntityEvent(byte p_219360_) {
+        if (p_219360_ == 61) {
+            this.groundAttackAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(p_219360_);
+        }
     }
 
     @Override

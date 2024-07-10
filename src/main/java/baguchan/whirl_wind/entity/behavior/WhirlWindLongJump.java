@@ -1,5 +1,6 @@
 package baguchan.whirl_wind.entity.behavior;
 
+import baguchan.whirl_wind.registry.ModMemorys;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -59,6 +60,8 @@ public class WhirlWindLongJump extends Behavior<Breeze> {
                         MemoryModuleType.BREEZE_SHOOT,
                         MemoryStatus.VALUE_ABSENT,
                         MemoryModuleType.WALK_TARGET,
+                        MemoryStatus.VALUE_ABSENT,
+                        ModMemorys.BREEZE_GROUND_ATTACK.get(),
                         MemoryStatus.VALUE_ABSENT
                 ),
                 200

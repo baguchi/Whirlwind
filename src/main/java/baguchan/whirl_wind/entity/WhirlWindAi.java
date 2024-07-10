@@ -1,5 +1,6 @@
 package baguchan.whirl_wind.entity;
 
+import baguchan.whirl_wind.entity.behavior.GroundAttack;
 import baguchan.whirl_wind.entity.behavior.ShootGust;
 import baguchan.whirl_wind.entity.behavior.WhirlShootWhenStuck;
 import baguchan.whirl_wind.entity.behavior.WhirlWindLongJump;
@@ -49,6 +50,8 @@ public class WhirlWindAi {
             MemoryModuleType.BREEZE_JUMP_TARGET,
             ModMemorys.BREEZE_SHOOT_REMAIN.get(),
             ModMemorys.BREEZE_SHOOT_REMAIN_COOLDOWN.get(),
+            ModMemorys.BREEZE_GROUND_ATTACK_COOLDOWN.get(),
+            ModMemorys.BREEZE_GROUND_ATTACK.get(),
             MemoryModuleType.BREEZE_LEAVING_WATER,
             MemoryModuleType.HURT_BY,
             MemoryModuleType.HURT_BY_ENTITY,
@@ -65,7 +68,7 @@ public class WhirlWindAi {
     }
 
     private static void initCoreActivity(Brain<WhirlWind> p_312774_) {
-        p_312774_.addActivity(Activity.CORE, 0, ImmutableList.of(new Swim(0.8F), new LookAtTargetSink(45, 90), new CountDownCooldownTicks(ModMemorys.BREEZE_SHOOT_REMAIN_COOLDOWN.get()), new SlideToTargetSink(20, 100)));
+        p_312774_.addActivity(Activity.CORE, 0, ImmutableList.of(new Swim(0.8F), new LookAtTargetSink(45, 90), new SlideToTargetSink(20, 100)));
     }
 
     private static void initFightActivity(Brain<WhirlWind> p_312350_) {
@@ -77,8 +80,9 @@ public class WhirlWindAi {
                         Pair.of(2, new ShootGust()),
                         Pair.of(3, new WhirlShootWhenStuck()),
                         Pair.of(4, new WhirlWindLongJump()),
-                        Pair.of(5, new Slide()),
-                        Pair.of(6, new RunOne<>(ImmutableList.of(Pair.of(new DoNothing(20, 100), 1), Pair.of(RandomStroll.stroll(0.6F), 2))))
+                        Pair.of(5, new GroundAttack()),
+                        Pair.of(6, new Slide()),
+                        Pair.of(7, new RunOne<>(ImmutableList.of(Pair.of(new DoNothing(20, 100), 1), Pair.of(RandomStroll.stroll(0.6F), 2))))
                 ),
                 Set.of()
         );
