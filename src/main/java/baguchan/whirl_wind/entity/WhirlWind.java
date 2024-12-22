@@ -1,5 +1,6 @@
 package baguchan.whirl_wind.entity;
 
+import baguchan.whirl_wind.registry.ModEntities;
 import baguchan.whirl_wind.registry.ModEntityTags;
 import baguchan.whirl_wind.registry.ModParticleTypes;
 import com.mojang.serialization.Dynamic;
@@ -52,6 +53,10 @@ public class WhirlWind extends Breeze {
                 .map(p_321468_ -> (LivingEntity) p_321468_);
     }
 
+    @Override
+    public boolean canAttack(LivingEntity p_312275_) {
+        return p_312275_.getType() != ModEntities.WHIRLWIND.get() && super.canAttack(p_312275_);
+    }
 
     @Override
     protected void customServerAiStep(ServerLevel p_376422_) {
