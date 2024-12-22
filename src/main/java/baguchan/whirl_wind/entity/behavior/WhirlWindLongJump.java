@@ -248,8 +248,8 @@ public class WhirlWindLongJump extends Behavior<Breeze> {
         }
 
         @Override
-        public float getEntityDamageAmount(Explosion p_311793_, Entity p_311929_) {
-            return (super.getEntityDamageAmount(p_311793_, p_311929_) - 2.0F) * 0.25F;
+        public float getEntityDamageAmount(Explosion p_311793_, Entity p_311929_, float p_364677_) {
+            return (super.getEntityDamageAmount(p_311793_, p_311929_, p_364677_) - 2.0F) * 0.25F;
         }
     }
 }

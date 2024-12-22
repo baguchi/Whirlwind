@@ -4,13 +4,11 @@ import baguchan.whirl_wind.entity.WhirlWind;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 
 public class WindParticle<T extends WhirlWind> extends TextureSheetParticle {
-    private static final TargetingConditions TARGET_CONDITION = TargetingConditions.forNonCombat();
     private final SpriteSet animatedSprite;
     @Nullable
     protected final WhirlWind whirlwind;
@@ -18,7 +16,9 @@ public class WindParticle<T extends WhirlWind> extends TextureSheetParticle {
     public WindParticle(ClientLevel level, double xCoord, double yCoord, double zCoord, double xSpeed, double ySpeed, double zSpeed, SpriteSet sprite) {
         super(level, xCoord, yCoord, zCoord, xSpeed, ySpeed, zSpeed);
         this.animatedSprite = sprite;
-        this.whirlwind = level.getNearestEntity(WhirlWind.class, TARGET_CONDITION, null, xCoord, yCoord, zCoord, new AABB(this.x - 3, this.y - 3, this.z - 3, this.x + 3, this.y + 3, this.z + 3));
+        this.whirlwind = level.getEntitiesOfClass(WhirlWind.class, new AABB(this.x - 3, this.y - 3, this.z - 3, this.x + 3, this.y + 3, this.z + 3), living -> {
+            return true;
+        }).getFirst();
     }
 
     @Override

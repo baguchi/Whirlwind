@@ -4,15 +4,14 @@ package baguchan.whirl_wind.client.render.model;// Made with Blockbench 4.8.3
 
 
 import baguchan.whirl_wind.client.render.animation.WhirlWindAnimation;
-import baguchan.whirl_wind.entity.WhirlWind;
-import net.minecraft.client.model.HierarchicalModel;
+import baguchan.whirl_wind.client.render.state.WhirlWindRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class WhirlWindModel<T extends WhirlWind> extends HierarchicalModel<T> {
-	private final ModelPart realroot;
+public class WhirlWindModel<T extends WhirlWindRenderState> extends EntityModel<T> {
 	public final ModelPart whirl_wind;
 	public final ModelPart head;
 	public final ModelPart body;
@@ -23,7 +22,7 @@ public class WhirlWindModel<T extends WhirlWind> extends HierarchicalModel<T> {
 	private final ModelPart windBottom;
 
 	public WhirlWindModel(ModelPart whirl_wind) {
-		this.realroot = whirl_wind;
+		super(whirl_wind);
 		this.whirl_wind = whirl_wind.getChild("whirl_wind");
 		this.body = this.whirl_wind.getChild("body");
 		this.head = this.body.getChild("head");
@@ -72,27 +71,22 @@ public class WhirlWindModel<T extends WhirlWind> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T entity) {
+		super.setupAnim(entity);
 		this.wind_swirls.visible = false;
-		this.realroot.getAllParts().forEach(ModelPart::resetPose);
-		this.head.xRot = headPitch * (float) (Math.PI / 180.0);
-		this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
-		float f = ageInTicks * (float) Math.PI * -0.1F;
+		this.head.xRot = entity.xRot * (float) (Math.PI / 180.0);
+		this.head.yRot = entity.yRot * (float) (Math.PI / 180.0);
+		float f = entity.ageInTicks * (float) Math.PI * -0.1F;
 		this.windTop.x = Mth.cos(f) * 1.0F * 0.6F;
 		this.windTop.z = Mth.sin(f) * 1.0F * 0.6F;
 		this.windMid.x = Mth.sin(f) * 0.5F * 0.8F;
 		this.windMid.z = Mth.cos(f) * 0.8F;
 		this.windBottom.x = Mth.cos(f) * -0.25F * 1.0F;
 		this.windBottom.z = Mth.sin(f) * -0.25F * 1.0F;
-		this.animate(entity.slide, WhirlWindAnimation.SLIDE, ageInTicks);
-		this.animate(entity.longJump, WhirlWindAnimation.JUMP, ageInTicks, 0.25F);
-		this.animate(entity.shoot, WhirlWindAnimation.SHOOT, ageInTicks);
-		this.animate(entity.groundAttackAnimationState, WhirlWindAnimation.GROUND_ATTACK, ageInTicks);
-		this.animateWalk(WhirlWindAnimation.IDLE, ageInTicks, 1.0F, 1.0F, 1.0F);
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.realroot;
+		this.animate(entity.slide, WhirlWindAnimation.SLIDE, entity.ageInTicks);
+		this.animate(entity.longJump, WhirlWindAnimation.JUMP, entity.ageInTicks, 0.25F);
+		this.animate(entity.shoot, WhirlWindAnimation.SHOOT, entity.ageInTicks);
+		this.animate(entity.groundAttackAnimationState, WhirlWindAnimation.GROUND_ATTACK, entity.ageInTicks);
+		this.animateWalk(WhirlWindAnimation.IDLE, entity.ageInTicks, 1.0F, 1.0F, 1.0F);
 	}
 }

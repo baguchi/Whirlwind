@@ -14,12 +14,12 @@ import java.util.concurrent.CompletableFuture;
 @EventBusSubscriber(modid = WhirlWindMod.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
+    public static void gatherData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        event.getGenerator().addProvider(event.includeClient(), new ItemModelGenerator(packOutput, event.getExistingFileHelper()));
-        event.getGenerator().addProvider(event.includeServer(), new EntityTagGenerator(packOutput, lookupProvider, existingFileHelper));
+        event.getGenerator().addProvider(true, new ItemModelGenerator(packOutput, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new EntityTagGenerator(packOutput, lookupProvider, existingFileHelper));
     }
 }

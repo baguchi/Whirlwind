@@ -1,17 +1,21 @@
 package baguchan.whirl_wind.entity;
 
-import baguchan.whirl_wind.registry.ModEntities;
 import baguchan.whirl_wind.registry.ModEntityTags;
 import baguchan.whirl_wind.registry.ModParticleTypes;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.breeze.Breeze;
 import net.minecraft.world.level.Explosion;
@@ -20,7 +24,9 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class WhirlWind extends Breeze {
     public AnimationState groundAttackAnimationState = new AnimationState();
@@ -38,9 +44,23 @@ public class WhirlWind extends Breeze {
         }
     }
 
+    public Optional<LivingEntity> getHurtBy() {
+        return this.getBrain()
+                .getMemory(MemoryModuleType.HURT_BY)
+                .map(DamageSource::getEntity)
+                .filter(p_321467_ -> p_321467_ instanceof LivingEntity)
+                .map(p_321468_ -> (LivingEntity) p_321468_);
+    }
+
+
     @Override
-    public boolean canAttack(LivingEntity p_312275_) {
-        return p_312275_.getType() != ModEntities.WHIRLWIND.get() && super.canAttack(p_312275_);
+    protected void customServerAiStep(ServerLevel p_376422_) {
+        ProfilerFiller profilerfiller = Profiler.get();
+        profilerfiller.push("whirlWindBrain");
+        this.getBrain().tick(p_376422_, this);
+        profilerfiller.popPush("whirlWindActivityUpdate");
+        WhirlWindAi.updateActivity(this);
+        profilerfiller.pop();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -50,6 +70,12 @@ public class WhirlWind extends Breeze {
     @Override
     protected Brain<?> makeBrain(Dynamic<?> p_312201_) {
         return WhirlWindAi.makeBrain(this.whirlBrainProvider().makeBrain(p_312201_));
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getTarget() {
+        return this.getTargetFromBrain();
     }
 
     @Override
@@ -118,7 +144,7 @@ public class WhirlWind extends Breeze {
 
                     this.level()
                             .addParticle(
-                                    new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(blockpos), d0, this.getY() + 0.1, d1, vec3.x * -4.0, 2, vec3.z * -4.0
+                                    new BlockParticleOption(ParticleTypes.BLOCK, blockstate), d0, this.getY() + 0.1, d1, vec3.x * -4.0, 2, vec3.z * -4.0
                             );
                 }
             }
