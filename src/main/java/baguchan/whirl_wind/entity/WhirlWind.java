@@ -7,6 +7,7 @@ import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
@@ -50,6 +51,14 @@ public class WhirlWind extends Breeze {
     @Override
     protected Brain<?> makeBrain(Dynamic<?> p_312201_) {
         return WhirlWindAi.makeBrain(this.whirlBrainProvider().makeBrain(p_312201_));
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        this.level().getProfiler().push("whirlWindBrain");
+        this.getBrain().tick((ServerLevel) this.level(), this);
+        this.level().getProfiler().popPush("whirlWindActivityUpdate");
+        WhirlWindAi.updateActivity(this);
     }
 
     @Override

@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.monster.breeze.Breeze;
+import net.minecraft.world.entity.monster.breeze.BreezeAi;
 import net.minecraft.world.entity.monster.breeze.Slide;
 import net.minecraft.world.entity.schedule.Activity;
 
@@ -60,6 +61,7 @@ public class WhirlWindAi {
 
     protected static Brain<?> makeBrain(Brain<WhirlWind> p_312887_) {
         initCoreActivity(p_312887_);
+        initIdleActivity(p_312887_);
         initFightActivity(p_312887_);
         p_312887_.setCoreActivities(Set.of(Activity.CORE));
         p_312887_.setDefaultActivity(Activity.FIGHT);
@@ -67,8 +69,24 @@ public class WhirlWindAi {
         return p_312887_;
     }
 
+    public static void updateActivity(WhirlWind p_316353_) {
+        p_316353_.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
+    }
+
     private static void initCoreActivity(Brain<WhirlWind> p_312774_) {
         p_312774_.addActivity(Activity.CORE, 0, ImmutableList.of(new Swim(0.8F), new LookAtTargetSink(45, 90), new SlideToTargetSink(20, 100)));
+    }
+
+    private static void initIdleActivity(Brain<WhirlWind> p_316741_) {
+        p_316741_.addActivity(
+                Activity.IDLE,
+                ImmutableList.of(
+                        Pair.of(0, StartAttacking.create(p_376863_ -> p_376863_.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE))),
+                        Pair.of(1, StartAttacking.create(p_375898_ -> p_375898_.getHurtBy())),
+                        Pair.of(2, new BreezeAi.SlideToTargetSink(20, 40)),
+                        Pair.of(3, new RunOne<>(ImmutableList.of(Pair.of(new DoNothing(20, 100), 1), Pair.of(RandomStroll.stroll(0.6F), 2))))
+                )
+        );
     }
 
     private static void initFightActivity(Brain<WhirlWind> p_312350_) {
